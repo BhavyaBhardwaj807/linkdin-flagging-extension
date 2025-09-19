@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LinkedIn Safety Extension</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h2>LinkedIn Safety</h2>
+
+  <!-- Profile Reputation -->
+  <section>
+    <h3>Profile Reputation</h3>
+    <input type="text" id="profileUrl" placeholder="Paste LinkedIn profile URL">
+    <button id="checkReputation">Check Profile</button>
+    <p id="reputationResult"></p>
+  </section>
+
+  <!-- Flag a Profile -->
+  <section>
+    <h3>Flag a Profile</h3>
+    <input type="text" id="flagUrl" placeholder="https://linkedin.com/in/...">
+    <textarea id="flagContent" placeholder="Paste message or post content"></textarea>
+    <input type="text" id="flagReason" placeholder="Why is it suspicious?">
+    <input type="file" id="flagScreenshot" accept="image/*">
+    <button id="submitFlag">Submit Flag</button>
+    <p id="flagResult"></p>
+  </section>
+
+  <!-- Templates -->
+  <section>
+    <h3>Templates</h3>
+    <button class="templateBtn" data-text="Hi, I’d love to connect and learn from your work.">Networking Invite</button>
+    <button class="templateBtn" data-text="Hello, I came across your job posting and would like to know more details.">Job Inquiry</button>
+    <p id="templateMsg"></p>
+  </section>
+
+  <!-- Mentor Tips -->
+  <section>
+    <h3>Mentor Tips</h3>
+    <input type="number" id="scoreInput" placeholder="Enter your reputation score" min="0" max="100">
+    <button id="getMentorTips">Get Mentor Tips</button>
+    <p id="mentorResult"></p>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>
