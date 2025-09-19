@@ -1,37 +1,99 @@
-# LinkedIn Flagging Extension ✅
+📌 LinkedIn Flagging & Reputation Extension
 
-A Chrome extension that allows users to flag suspicious LinkedIn profiles for **fake job postings**, **severe flirting**, or **spam content**. The extension uses **OCR.space API** to extract text from uploaded screenshots and **Gemini API** to analyze the content for potential issues.
+This project is a Chrome browser extension + Node.js backend that helps flag fake jobs, scammy messages, and unprofessional behavior on LinkedIn.
+It includes a reputation score system, reporting templates, and mentor tips powered by Gemini AI.
 
-This is a prototype extension built for demonstration purposes and does not track users or display detailed information about flags.
+🚀 Features
 
----
+Flag Profiles/Posts → Report scam jobs, spam, or flirty/unprofessional messages.
 
-## 📌 Features
+Screenshot Evidence Upload → Users attach screenshots + text when flagging.
 
-- ✅ Add a flag icon (gray or red) on LinkedIn profiles based on selected reasons.
-- ✅ Upload screenshots to extract text using OCR.space API.
-- ✅ Analyze extracted text using Gemini API for abusive language, flirting, or fake job content.
-- ✅ Display verification results after analyzing the content.
-- ✅ Prototype implementation that shows flags only to the current user and does not store or share data.
+Reputation Score System → Tracks user trust level.
 
----
+Templates → Quick “Networking Invite” / “Job Inquiry” messages.
 
-## 🚀 How It Works
+Mentor Mode → AI-powered LinkedIn mentor tips (via Gemini AI).
 
-1. The user selects a reason (**Fake Job** or **Flirty Message**) from the dropdown.
-2. The user uploads a screenshot related to the profile.
-3. The extension sends the screenshot to **OCR.space API**, which extracts the text from the image.
-4. The extracted text is sent to **Gemini API**, which classifies the content.
-5. Based on the classification, the extension shows the appropriate flag icon and message.
+📂 File Structure
+linkedin-flagging-extension/
+│
+├── backend/                         # Node.js server (handles flags, scores, AI calls)(for admin)
+│   ├── server.js                    # Express backend
+│   ├── package.json                 # Backend dependencies
+│   ├── serviceAccountKey.json       # Firebase Admin SDK key (keep secret)
+│   └── .env                         # API keys (Gemini, Firebase, etc.)
+│
+├── extension/                       # Chrome Extension code
+│   ├── manifest.json                # Extension config
+│   ├── popup.html                   # UI for extension popup
+│   ├── popup.js                     # Frontend logic (calls backend, UI handlers)
+│   ├── styles.css                   # Styling for popup
+│   ├── background.js                # Extension background logic
+│   └── icons/
+│       ├── icon16.png
+│       ├── icon48.png
+│       └── icon128.png
+│
+└── README.md   
 
----
+⚙️ Setup Instructions
+1️⃣ Backend Setup
 
-## 📦 Setup Instructions
+Navigate to backend:
 
-1. Clone or download this repository.
-2. Get your **OCR.space API Key** from [https://ocr.space/ocrapi](https://ocr.space/ocrapi).
-3. Get your **Gemini API Key** from Google Cloud Console.
-4. Add the API keys in the `popup.js` file:
-   ```javascript
-   const OCR_API_KEY = "<YOUR_OCR_SPACE_API_KEY>";
-   const GEMINI_API_KEY = "<YOUR_GEMINI_API_KEY>";
+cd backend
+
+
+Install dependencies:
+
+npm install
+
+
+Create .env file:
+
+GOOGLE_API_KEY=your_gemini_api_key
+
+
+Place your Firebase serviceAccountKey.json file in backend folder.
+
+Run backend server:
+
+node server.js
+
+
+✅ Should start at: http://localhost:3000
+
+2️⃣ Extension Setup
+
+Go to Chrome → Extensions → Manage Extensions.
+
+Enable Developer Mode (toggle top-right).
+
+Click Load unpacked and select the extension/ folder.
+
+Extension should now appear in your toolbar.
+
+3️⃣ Usage
+
+Open the extension popup.
+
+Check Reputation → Enter LinkedIn profile URL.
+
+Flag User → Paste content, add screenshot, select reason, click submit.
+
+Mentor Mode → Enter your score and click Get Mentor Tips.
+
+Templates → Quick copy networking/job messages.
+
+🔐 Security Notes
+
+Your Gemini API Key must be kept private → safest if used in backend only.
+
+Do NOT commit serviceAccountKey.json or .env to GitHub.
+
+If you use Gemini from frontend (popup.js), whitelist domain in manifest.json:
+
+"permissions": [
+  "https://generativelanguage.googleapis.com/*"
+]
